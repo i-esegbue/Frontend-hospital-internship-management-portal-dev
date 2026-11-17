@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login — Lancashire Medicare</title>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/login.css" rel="stylesheet">
+</head>
+<body>
+
+  <main class="container-auth">
+    <div class="auth-card" role="region" aria-label="Authentication">
+
+      <!-- Left side: welcome, role selector info -->
+      <div class="auth-side">
+        <div class="d-flex align-items-center ">
+          <a href="index.html" class="nav-link fw-bold text-primary text-center " style="margin-left: 30%;">Lancashire Medicare</a>
+        </div>
+
+        <p class="small-muted"style="margin-bottom: 30%;">Sign in or create an account as Student, Employer or Admin. </p>
+
+    
+        <div class="divider" aria-hidden="true"></div>
+
+        <div class="small-muted">
+          Users:
+          <ul>
+            <li>Student — student@lancashiremedicare.co.uk / password</li>
+            <li>Employer — employer@lancashiremedicare.co.uk / password</li>
+            <li>Admin — admin@lancashiremedicare.co.uk / password</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right side: forms -->
+      <div class="auth-form">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="mb-0">Access account</h4>
+          <div class="text-end small-muted">
+            <div id="signedInUser" style="display:none">
+              <img id="signedAvatar" src="" class="avatar-sm me-1" alt="">
+              <span id="signedName"></span>
+            </div>
+            <div id="notSigned">Not signed in</div>
+          </div>
+        </div>
+
+        <ul class="nav nav-pills role-tabs mb-3" id="authTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="login-tab" data-bs-toggle="pill" data-bs-target="#loginPane" type="button" role="tab" aria-controls="loginPane" aria-selected="true">
+              <i class="bi bi-box-arrow-in-right me-1"></i> Login
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="signup-tab" data-bs-toggle="pill" data-bs-target="#signupPane" type="button" role="tab" aria-controls="signupPane" aria-selected="false">
+              <i class="bi bi-person-plus me-1"></i> Sign up
+            </button>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <!-- LOGIN PANE -->
+          <div class="tab-pane fade show active" id="loginPane" role="tabpanel" aria-labelledby="login-tab">
+            <form id="loginForm" novalidate>
+              <div class="mb-3">
+                <label for="loginEmail" class="form-label">Email</label>
+                <input id="loginEmail" type="email" class="form-control" placeholder="you@lancashiremedicare.co.uk" required autocomplete="username">
+              </div>
+
+              <div class="mb-3 position-relative">
+                <label for="loginPassword" class="form-label">Password</label>
+                <input id="loginPassword" type="password" class="form-control" placeholder="Password" required autocomplete="current-password">
+                <button type="button" class="btn btn-sm btn-link position-absolute top-50 end-0 translate-middle-y" id="toggleLoginPwd" aria-label="Toggle password"><i id="toggleLoginIcon" class="bi bi-eye-slash"></i></button>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="form-check">
+                  <input id="remember" class="form-check-input" type="checkbox">
+                  <label class="form-check-label small-muted" for="remember">Remember me</label>
+                </div>
+                <a href="Login.html" class="small">Forgot Password?</a>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary w-100">Sign in</button>
+              </div>
+
+              <div id="loginError" class="validation-error" role="alert" style="display:none"></div>
+
+            </form>
+          </div>
+
+          <!-- SIGNUP PANE -->
+          <div class="tab-pane fade" id="signupPane" role="tabpanel" aria-labelledby="signup-tab">
+            <form id="signupForm" novalidate>
+              <div class="row g-2">
+                <div class="col-6">
+                  <label for="firstName" class="form-label">First name</label>
+                  <input id="firstName" class="form-control" required>
+                </div>
+                <div class="col-6">
+                  <label for="lastName" class="form-label">Last name</label>
+                  <input id="lastName" class="form-control" required>
+                </div>
+              </div>
+
+              <div class="mb-3 mt-2">
+                <label for="signupEmail" class="form-label">Work email</label>
+                <input id="signupEmail" type="email" class="form-control" placeholder="you@lancashiremedicare.co.uk" required>
+              </div>
+
+              <div class="row g-2">
+                <div class="col-6">
+                  <label for="signupPassword" class="form-label">Password</label>
+                  <input id="signupPassword" type="password" class="form-control" minlength="8" required>
+                </div>
+                <div class="col-6">
+                  <label for="confirmPassword" class="form-label">Confirm</label>
+                  <input id="confirmPassword" type="password" class="form-control" required>
+                </div>
+              </div>
+
+              <div class="mb-3 mt-2">
+                <label for="roleSelect" class="form-label">Role</label>
+                <select id="roleSelect" class="form-select" required>
+                  <option value="">Select role</option>
+                  <option value="student">Student</option>
+                  <option value="employer">Employer</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+
+              <!-- role-specific fields -->
+              <div id="roleExtra"></div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-success w-100">Create account</button>
+              </div>
+
+              <div id="signupMsg" class="login-note mt-2" style="display:none"></div>
+            </form>
+          </div>
+        </div>
+
+        <div class="footer-note">© 2025 Lancashire Medicare</div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

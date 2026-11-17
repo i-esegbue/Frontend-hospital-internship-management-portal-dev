@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Employer Tracker— Lancashire Medicare</title>
+
+  <!-- Bootstrap 5, DataTables and Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.datatables.net/2.3.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/employee_patient_tracker.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <!-- Top navigation -->
+  <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <span class="fw-bold">Lancashire Medicare</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="ms-auto d-flex align-items-center gap-3">
+        <div id="signedInUser" class="d-none d-md-flex align-items-center text-muted small">
+          Signed in as <strong id="signedName" class="ms-1"></strong>
+        </div>
+        <div class="dropdown">
+          <button class="btn btn-light btn-sm d-flex align-items-center gap-2" id="accountMenu" data-bs-toggle="dropdown" aria-expanded="false">
+            <img id="signedAvatar" class="userProfilePic rounded-circle" width="34" height="34" alt="User Avatar" src="">
+            <i class="bi bi-caret-down-fill ms-1 d-none d-md-inline"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="Profile_page.html"><i class="bi bi-person me-2"></i>Profile</a></li>
+            <li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear me-2"></i>Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item logoutBtn" href="#"><i class="bi bi-box-arrow-right me-2"></i>Sign out</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Offcanvas sidebar for small screens -->
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="sidebarOffcanvasLabel">Menu</h5>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        
+      </div>
+
+      <!-- Sidebar (visible on md+) -->
+      <aside class="col-12 col-md-3 col-lg-2 d-none d-md-block bg-white border-end vh-100 p-3">
+        <nav class="nav nav-pills flex-column">
+          <a class="btn btn-outline-success mb-2 disabled" href="employer_tracker.html"><i class="bi bi-people-fill me-2"></i>Internship tracker</a><br>
+
+          <a class="btn mb-2  btn-primary" href="events.html"><i class="bi bi-calendar-event me-2 fw-bold"></i>Schedule an Interview</a>
+        </nav>
+      </aside>
+
+      <!-- Main content -->
+      <main class="col-12 col-md-9 col-lg-10 py-4">
+        <div class="container-lg">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-1 mt-3">
+                <h4 class="mb-0 " style="margin-left: 30%;">Internship Applications</h4>
+                <div class="d-flex gap-2">
+                  <button class="btn btn-outline-secondary btn-sm" id="refreshBtn" data-bs-toggle="tooltip" title="Refresh table"><i class="bi bi-arrow-clockwise"></i></button>
+                  <div class="input-group input-group-sm" style="width:220px">
+                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                    <input id="tableSearch" class="form-control form-control-sm" placeholder="Search applicants">
+                  </div>
+                </div>
+              </div>
+
+              <div class="table-responsive mt-4">
+                <table id="applicantsTable" class="table table-hover table-borderless align-middle mt-3">
+                  <thead class="table-light">
+                    <tr>
+                      <th style="width:48px">#</th>
+                      <th>First</th>
+                      <th>Last</th>
+                      <th>Email</th>
+                      <th>University</th>
+                      <th>Role</th>
+                      <th>Status</th>
+                      <th style="width:180px">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="appBody">
+                    <tr data-cv="cv_chidera.pdf" data-cover="cover_chidera.pdf">
+                      <td>1</td><td>Chidera</td><td>Okafor</td><td>chidera@example.com</td><td>UCLan</td><td>Radiography Intern</td><td>Applied</td><td></td>
+                    </tr>
+                    <tr data-cv="cv_hannah.pdf" data-cover="cover_hannah.pdf">
+                      <td>2</td><td>Hannah</td><td>Smith</td><td>hannah@example.com</td><td>Manchester</td><td>Dentist Intern</td><td>Applied</td><td></td>
+                    </tr>
+                    <tr data-cv="cv_michael.pdf" data-cover="cover_michael.pdf">
+                      <td>3</td><td>Michael</td><td>Jones</td><td>michael@example.com</td><td>Liverpool</td><td>Nursing Intern</td><td>Applied</td><td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity / Notifications -->
+          <div id="toastArea" class="position-fixed bottom-0 end-0 p-3" style="z-index:1080"></div>
+        </div>
+
+        <!-- Applicant Modal -->
+        <div class="modal fade" id="applicantModal" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Applicant Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <dl class="row mb-0">
+                  <dt class="col-sm-4">First Name</dt><dd class="col-sm-8" id="modalFirst"></dd>
+                  <dt class="col-sm-4">Last Name</dt><dd class="col-sm-8" id="modalLast"></dd>
+                  <dt class="col-sm-4">Email</dt><dd class="col-sm-8" id="modalEmail"></dd>
+                  <dt class="col-sm-4">Nationality</dt><dd class="col-sm-8" id="modalNation"></dd>
+                  <dt class="col-sm-4">University</dt><dd class="col-sm-8" id="modalUniv"></dd>
+                  <dt class="col-sm-4">Course</dt><dd class="col-sm-8" id="modalCourse"></dd>
+                  <dt class="col-sm-4">Desired Role</dt><dd class="col-sm-8" id="modalRole"></dd>
+                  <dt class="col-sm-4">Status</dt><dd class="col-sm-8" id="modalStatus"></dd>
+                  <dt class="col-sm-4">CV</dt><dd class="col-sm-8"><a href="#" id="modalCV" download>Download CV</a></dd>
+                  <dt class="col-sm-4">Cover Letter</dt><dd class="col-sm-8"><a href="#" id="modalCover" download>Download Cover Letter</a></dd>
+                </dl>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-outline-primary" id="modalOffer">Offer Interview</button>
+                <button class="btn btn-outline-danger" id="modalReject">Reject</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <footer class="bd-footer py-3 bg-white text-center text-muted border-top mt-4">
+    &copy; 2025 Lancashire Medicare
+  </footer>
+
+  <!-- JS libraries -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/2.3.4/js/dataTables.bootstrap5.min.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/employer_tracker.js"></script>
+  <script src="js/script.js"></script>
+
+</body>
+</html>
