@@ -2,7 +2,7 @@
 
 A responsive, multi-role front-end web interface for a hospital internship management portal. Built with **HTML5**, **CSS3**, **Bootstrap 5**, and **JavaScript**, this static showcase allows users to explore student, employer, and administrator dashboards directly in the browser.
 
-**Live Demo:** [View Live Website](i-esegbue.github.io/Frontend-hospital-internship-management-portal-dev)
+**Live Demo:** [View Live Website]- (i-esegbue.github.io/Frontend-hospital-internship-management-portal-dev)
 
 ## Key Features
 
