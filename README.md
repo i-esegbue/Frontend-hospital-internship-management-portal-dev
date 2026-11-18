@@ -7,9 +7,9 @@ A responsive, multi-role front-end web interface for a hospital internship manag
 ## Key Features
 
 * **Multi-Role User Interfaces:** Dedicated front-end views for Students, Employers, and Hospital Administrators.
-* **Student Experience:** Interactive pages for browsing clinical job roles (`jobroles.html`), submitting applications (`Studentformsubmit.html`), tracking application history (`application_history.html`), and managing user profiles (`Profile_page.html`).
-* **Employer & Admin Dashboards:** Structured management views (`Admin_dashboard.html`, `employee_dashboard.html`) along with internship and patient tracker interfaces.
-* **Authentication & Site Pages:** Clean login screen (`Login.html`), upcoming events (`events.html`), account settings (`settings.html`), and platform overview (`About.html`).
+* **Student Experience:** Interactive pages for browsing clinical job roles (`job-roles.html`), submitting applications (`student-form-submit.html`), tracking application history (`application-history.html`), and managing user profiles (`profile.html`).
+* **Employer & Admin Dashboards:** Structured management views (`admin-dashboard.html`, `employee-dashboard.html`) along with internship and patient tracker interfaces.
+* **Authentication & Site Pages:** Clean login screen (`login.html`), upcoming events (`events.html`), account settings (`settings.html`), and platform overview (`about.html`).
 * **Responsive Mobile-First Design:** Built with **Bootstrap 5**, custom CSS, and JavaScript to adapt smoothly across desktop, tablet, and mobile screens.
 
 ## Tech Stack
@@ -21,9 +21,9 @@ A responsive, multi-role front-end web interface for a hospital internship manag
 ## Project Structure
 
 * `index.html` — Main landing page
-* `Login.html` — User sign-in interface
-* `jobroles.html` & `Studentformsubmit.html` — Student job board and application form
-* `Admin_dashboard.html` & `employee_dashboard.html` — Administrative and employer management dashboards
+* `login.html` — User sign-in interface
+* `job-roles.html` & `student-form-submit.html` — Student job board and application form
+* `admin-dashboard.html` & `employee-dashboard.html` — Administrative and employer management dashboards
 * `/css`, `/js`, `/images` — Custom stylesheets, interactive scripts, and static visual assets
 
 ## Full-Stack Version

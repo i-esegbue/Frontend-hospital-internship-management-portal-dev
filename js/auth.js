@@ -11,13 +11,13 @@ const currentPage = window.location.pathname.split('/').pop().toLowerCase();
 // Define role-specific pages
 // Pages may be accessible to more than one role; list pages per role below.
 const rolePages = {
-  student: ['studentformsubmit.html', 'application_history.html'],
-  employer: ['employee_dashboard.html', 'employee_patient_tracker.html', 'employer_tracker.html', 'employer_internship_tracker.html', 'employer_tracker copy.html'],
-  admin: ['admin_dashboard.html', 'admin_patient_tracker.html', 'employer_tracker.html', 'employer_internship_tracker.html']
+  student: ['student-form-submit.html', 'application-history.html'],
+  employer: ['employee-dashboard.html', 'employer-patient-tracker.html', 'employer-internship-tracker.html'],
+  admin: ['admin-dashboard.html', 'admin-patient-tracker.html', 'employer-internship-tracker.html']
 };
 
 // Common pages accessible to all logged-in users
-const commonPages = ['events.html', 'settings.html', 'profile_page.html'];
+const commonPages = ['events.html', 'settings.html', 'profile.html'];
 
 // Normalize page name (ignore query strings)
 const pageName = currentPage.split('?')[0];
@@ -107,9 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Redirect based on role
       setTimeout(() => {
-        if (user.role === 'student') window.location.href = 'application_history.html';
-        else if (user.role === 'employer') window.location.href = 'employee_dashboard.html';
-        else window.location.href = 'Admin_dashboard.html';
+        if (user.role === 'student') window.location.href = 'application-history.html';
+        else if (user.role === 'employer') window.location.href = 'employee-dashboard.html';
+        else window.location.href = 'admin-dashboard.html';
       }, 400);
     });
   }
@@ -193,9 +193,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       setTimeout(() => {
         sessionStorage.setItem('lm_user', JSON.stringify({ email, role, name }));
-        if (role === 'student') window.location.href = 'Studentformsubmit.html';
-        else if (role === 'employer') window.location.href = 'employee_dashboard.html';
-        else window.location.href = 'Admin_dashboard.html';
+        if (role === 'student') window.location.href = 'student-form-submit.html';
+        else if (role === 'employer') window.location.href = 'employee-dashboard.html';
+        else window.location.href = 'admin-dashboard.html';
       }, 800);
     });
   }
